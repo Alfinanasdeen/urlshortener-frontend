@@ -6,10 +6,12 @@ const UrlShortener = () => {
   const [fullUrl, setFullUrl] = useState("");
   const [shortUrls, setShortUrls] = useState([]);
 
+  const apiBaseUrl = 'https://urlshortener-backend-cq2h.onrender.com'; // Update this with your backend URL
+
   useEffect(() => {
     const fetchShortUrls = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/shortUrls");
+        const response = await axios.get(`${apiBaseUrl}/shortUrls`);
         setShortUrls(response.data);
       } catch (error) {
         console.error("Failed to fetch short URLs:", error);
@@ -21,7 +23,7 @@ const UrlShortener = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/shortUrls", {
+      const response = await axios.post(`${apiBaseUrl}/shortUrls`, {
         fullUrl,
       });
       setShortUrls([...shortUrls, response.data]);

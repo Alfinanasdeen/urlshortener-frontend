@@ -2,6 +2,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import config from "../config"; 
 
 function ForgetPassword() {
   const [email, setEmail] = useState();
@@ -13,7 +14,7 @@ function ForgetPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/forget-password", {
+      .post(`${config.apiBaseUrl}/forget-password`, {
         email,
       })
       .then((res) => {

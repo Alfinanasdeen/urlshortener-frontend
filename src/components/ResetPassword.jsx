@@ -2,6 +2,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import config from "../config"; 
 
 function ResetPassword() {
   const [password, setPassword] = useState();
@@ -14,7 +15,7 @@ function ResetPassword() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3000/reset-password/${id}/${token}`, {
+      .post(`${config.apiBaseUrl}/reset-password/${id}/${token}`, {
         password,
       })
       .then((res) => {
