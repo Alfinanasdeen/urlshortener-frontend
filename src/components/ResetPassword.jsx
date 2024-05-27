@@ -2,7 +2,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import config from "../config"; 
+import config from "../config";
 
 function ResetPassword() {
   const [password, setPassword] = useState();

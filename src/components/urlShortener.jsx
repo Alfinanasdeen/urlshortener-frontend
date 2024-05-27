@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import config from "../config";
 
 const UrlShortener = () => {
   const [fullUrl, setFullUrl] = useState("");
   const [shortUrls, setShortUrls] = useState([]);
 
-  const apiBaseUrl = 'https://urlshortener-backend-cq2h.onrender.com'; // Update this with your backend URL
-
   useEffect(() => {
     const fetchShortUrls = async () => {
       try {
-        const response = await axios.get(`${apiBaseUrl}/shortUrls`);
+        const response = await axios.get(`${config.apiBaseUrl}/shortUrls`);
         setShortUrls(response.data);
       } catch (error) {
         console.error("Failed to fetch short URLs:", error);
@@ -23,7 +22,7 @@ const UrlShortener = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${apiBaseUrl}/shortUrls`, {
+      const response = await axios.post(`${config.apiBaseUrl}/shortUrls`, {
         fullUrl,
       });
       setShortUrls([...shortUrls, response.data]);
@@ -61,29 +60,30 @@ const UrlShortener = () => {
           </tr>
         </thead>
         <tbody>
-          {shortUrls.map((shortUrl) => (
-            <tr key={shortUrl._id}>
-              <td>
-                <a
-                  href={shortUrl.full}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {shortUrl.full}
-                </a>
-              </td>
-              <td>
-                <a
-                  href={`http://localhost:3000/api/${shortUrl.short}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {shortUrl.short}
-                </a>
-              </td>
-              <td>{shortUrl.clicks}</td>
-            </tr>
-          ))}
+          {Array.isArray(shortUrls) &&
+            shortUrls.map((shortUrl) => (
+              <tr key={shortUrl._id}>
+                <td>
+                  <a
+                    href={shortUrl.full}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {shortUrl.full}
+                  </a>
+                </td>
+                <td>
+                  <a
+                    href={`http://localhost:3000/api/${shortUrl.short}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {shortUrl.short}
+                  </a>
+                </td>
+                <td>{shortUrl.clicks}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

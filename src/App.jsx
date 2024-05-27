@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/registration" element={<Registration />}></Route>
           <Route path="/forget-password" element={<ForgetPassword />}></Route>
-          <Route path="/reset-password" element={<ResetPassword/>}></Route>
+          <Route path="/reset-password" element={<ResetPassword />}></Route>
           <Route path="/shortUrls" element={<UrlShortener />}></Route>
           <Route path="/:shortUrl" element={<UrlShortener />}></Route>
         </Routes>

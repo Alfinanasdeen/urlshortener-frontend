@@ -4,6 +4,9 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import config from "../config";
 
+console.log("VITE_API_BASE_URL:", import.meta.env.VITE_API_BASE_URL);
+console.log("URL:", config.apiBaseUrl);
+
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -22,8 +25,8 @@ function Login() {
       .then((res) => {
         if (res.data.Status === "success") {
           localStorage.setItem("token", res.data.token); // Set token in localStorage
-          
-          navigate("/shortUrls ");
+
+          navigate("/shortUrls");
         }
         console.log(res.data);
       })
